@@ -2,11 +2,11 @@
   "name": "meteor-prj-notes",
   "private": true,
   "scripts": {
-    "start": "TEST_WATCH=1 meteor test --full-app --driver-package meteortesting:mocha",
-    "startx": "meteor run",
+    "start": "meteor run",
     "test": "meteor test --once --driver-package meteortesting:mocha",
     "test-app": "TEST_WATCH=1 meteor test --full-app --driver-package meteortesting:mocha",
-    "visualize": "meteor --production --extra-packages bundle-visualizer"
+    "visualize": "meteor --production --extra-packages bundle-visualizer",
+    "heroku-postbuild": "TEST_WATCH=1 meteor test --full-app --driver-package meteortesting:mocha"
   },
   "dependencies": {
     "@babel/runtime": "^7.0.0-beta.51",
