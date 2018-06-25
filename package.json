@@ -5,11 +5,12 @@
     "start": "meteor run",
     "test": "meteor test --once --driver-package meteortesting:mocha",
     "test-app": "TEST_WATCH=1 meteor test --full-app --driver-package meteortesting:mocha",
-    "visualize": "meteor --production --extra-packages bundle-visualizer",
-    "heroku-postbuild": "TEST_WATCH=1 meteor test --full-app --driver-package meteortesting:mocha"
+    "visualize": "meteor --production --extra-packages bundle-visualizer"
   },
   "dependencies": {
     "@babel/runtime": "^7.0.0-beta.51",
+    "babel-runtime": "^6.26.0",
+    "emoji-mart": "^2.6.1",
     "history": "^4.7.2",
     "meteor-node-stubs": "^0.4.1",
     "prop-types": "^15.6.1",

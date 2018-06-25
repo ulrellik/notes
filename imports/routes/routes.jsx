@@ -7,6 +7,7 @@ import Login from '../ui/Login';
 import Signup from '../ui/Signup';
 import Dashboard from '../ui/Dashboard';
 import NotFound from '../ui/NotFound';
+import Tests from '../ui/Tests';
 
 const authPaths = ['/dashboard'];
 const unauthPaths = ['/', '/signup'];
@@ -26,6 +27,7 @@ export default <Router>
       <Route exact path="/" render={() => !Meteor.userId() ? <Login/> : <Redirect to="/dashboard"/>}/>
       <Route exact path="/signup" render={() => !Meteor.userId() ? <Signup/> : <Redirect to="/dashboard"/>}/>
       <Route exact path="/dashboard" render={() => !!Meteor.userId() ? <Dashboard/> : <Redirect to="/"/>}/>
+      <Route exact path="/tests" render={() => !!Meteor.userId() ? <Tests/> : <Redirect to="/"/>}/>
       <Route component={NotFound}/>
     </Switch>
   </Router>;
