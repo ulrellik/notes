@@ -2,9 +2,10 @@
   "name": "meteor-prj-notes",
   "private": true,
   "scripts": {
-    "start": "meteor run",
-    "test": "meteor test --once --driver-package meteortesting:mocha",
-    "test-app": "TEST_WATCH=1 meteor test --full-app --driver-package meteortesting:mocha",
+    "start": "MONGO_URL=mongodb://heroku_0cmg72ht:k7lg6uffh0mlh5hicr1vt9ge7v@ds263380.mlab.com:63380/heroku_0cmg72ht meteor run",
+    "test": "MONGO_URL=mongodb://heroku_0cmg72ht:k7lg6uffh0mlh5hicr1vt9ge7v@ds263380.mlab.com:63380/heroku_0cmg72ht TEST_BROWSER_DRIVER=chrome meteor --once test --driver-package meteortesting:mocha",
+    "test-watch": "MONGO_URL=mongodb://heroku_0cmg72ht:k7lg6uffh0mlh5hicr1vt9ge7v@ds263380.mlab.com:63380/heroku_0cmg72ht TEST_WATCH=1 meteor test --driver-package meteortesting:mocha",
+    "test-app": "MONGO_URL=mongodb://heroku_0cmg72ht:k7lg6uffh0mlh5hicr1vt9ge7v@ds263380.mlab.com:63380/heroku_0cmg72ht TEST_WATCH=1 meteor test --full-app --driver-package meteortesting:mocha",
     "visualize": "meteor --production --extra-packages bundle-visualizer"
   },
   "dependencies": {
@@ -19,13 +20,18 @@
     "react-flip-move": "^3.0.2",
     "react-modal": "^3.4.5",
     "react-router-dom": "^4.3.1",
-    "simpl-schema": "^1.5.0"
+    "simpl-schema": "^1.5.3"
   },
   "meteor": {
     "mainModule": {
       "client": "client/main.js",
       "server": "server/main.js"
-    },
-    "testModule": "test/main.js"
+    }
+  },
+  "devDependencies": {
+    "chromedriver": "^2.40.0",
+    "expect": "^23.4.0",
+    "jest": "^23.4.1",
+    "selenium-webdriver": "3.6.0"
   }
 }
