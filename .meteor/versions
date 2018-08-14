@@ -63,6 +63,7 @@ practicalmeteor:mocha-core@1.0.1
 promise@0.11.1
 random@1.1.0
 rate-limit@1.0.9
+react-meteor-data@0.2.16
 reactive-dict@1.2.0
 reactive-var@1.0.11
 reload@1.2.0
@@ -79,6 +80,7 @@ standard-minifier-css@1.4.1
 standard-minifier-js@2.3.4
 static-html@1.2.2
 templating-tools@1.1.2
+tmeasday:check-npm-versions@0.3.2
 tracker@1.2.0
 underscore@1.0.10
 url@1.2.0

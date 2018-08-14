@@ -1,8 +1,10 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 import { Meteor } from 'meteor/meteor'
+import PropTypes from 'prop-types';
+import { withTracker } from 'meteor/react-meteor-data';
 
-export default class Login extends React.Component {
+export class Login extends React.Component {
   constructor(props) {
     super(props);
     // https://daveceddia.com/avoid-bind-when-passing-props/
@@ -12,10 +14,14 @@ export default class Login extends React.Component {
     }
   }
 
+  static propTypes = {
+    loginWithPassword: PropTypes.func.isRequired,
+  }
+
   onSubmit(event) {
     event.preventDefault();
 
-    Meteor.loginWithPassword({email: this.refs.email.value.trim()}, this.refs.password.value.trim(), (err) => {
+    this.props.loginWithPassword({email: this.refs.email.value.trim()}, this.refs.password.value.trim(), (err) => {
       if (err) {
         this.setState({
           error: err.message,
@@ -40,3 +46,9 @@ export default class Login extends React.Component {
     </div>
   }
 }
+
+export default LoginContainer = withTracker(props => {
+  return {
+    loginWithPassword: Meteor.loginWithPassword,
+  };
+})(Login);

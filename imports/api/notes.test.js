@@ -23,6 +23,7 @@ if (Meteor.isServer) {
     };
 
     beforeEach(function() {
+      this.timeout(10000);
       Notes.remove({});
       Notes.insert(note1);
       Notes.insert(note2);
