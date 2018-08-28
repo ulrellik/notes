@@ -37,8 +37,8 @@ export class Login extends React.Component {
         {this.state.error && <p>{this.state.error}</p>}
 
         <form onSubmit={this.onSubmit} className="boxed-view__form">
-          <input type="email" ref="email" name="email" placeholder="E-Mail"/>
-          <input type="password" ref="password" name="password" placeholder="Password"/>
+          <input type="email" ref="email" name="email" placeholder="E-Mail" autoComplete="username"/>
+          <input type="password" ref="password" name="password" placeholder="Password" autoComplete="current-password"/>
           <button className="button">Login</button>
         </form>
         <Link to="/signup">Not having an account?</Link>
