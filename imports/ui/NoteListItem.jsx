@@ -7,7 +7,7 @@ import moment from 'moment';
 
 export default NoteListItem = props => {
   return (
-    <div onClick={() => Session.set('selectedNoteId', props.note._id)}>
+    <div className={ props.note.selected ? 'selected' : undefined } onClick={() => Session.set('selectedNoteId', props.note._id)}>
       <h5>{ props.note.title || 'Untitled' }</h5>
       <p>{ moment(props.note.updatedAt).format('DD/MM/YYYY') }</p>
     </div>

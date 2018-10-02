@@ -1,6 +1,7 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch, Link, Redirect } from 'react-router-dom';
+import { Router as Router, Route, Switch, Link, Redirect } from 'react-router-dom';
 import { Meteor } from 'meteor/meteor';
+import { Session } from 'meteor/session';
 import createHistory from "history/createBrowserHistory"
 
 import Login from '../ui/Login';
@@ -8,25 +9,23 @@ import Signup from '../ui/Signup';
 import Dashboard from '../ui/Dashboard';
 import NotFound from '../ui/NotFound';
 
-const authPaths = ['/dashboard'];
-const unauthPaths = ['/', '/signup'];
-const history = createHistory();
+export const history = createHistory();
 
-export function onAuthChange() {
-  const isAuth = !!Meteor.userId();
-  if (isAuth && unauthPaths.includes(history.location.pathname)) {
-    history.replace('/dashboard');
-  } else if (!isAuth && authPaths.includes(history.location.pathname)) {
-    history.replace('/');
-  }
-}
+PrivateRoute = ({ component: Component, ...rest }) => (
+    <Route {...rest} render={ props => !!Meteor.userId() ? <Component {...props} /> : <Redirect to="/" />} />
+);
 
-export default <Router>
+PublicRoute = ({ component: Component, ...rest }) => (
+    <Route {...rest} render={ props => !Meteor.userId() ? <Component {...props} /> : <Redirect to="/dashboard" />} />
+);
+
+
+export default <Router history={history}>
     <Switch>
-      <Route exact path="/" render={() => !Meteor.userId() ? <Login/> : <Redirect to="/dashboard"/>}/>
-      <Route exact path="/signup" render={() => !Meteor.userId() ? <Signup/> : <Redirect to="/dashboard"/>}/>
-      <Route exact path="/dashboard" render={() => !!Meteor.userId() ? <Dashboard/> : <Redirect to="/"/>}/>
-      <Route path="/dashboard/:id" render={() => !!Meteor.userId() ? <Dashboard/> : <Redirect to="/"/>}/>
+      <PublicRoute exact path="/" component={Login} />
+      <PublicRoute exact path="/signup" component={Signup} />
+      <PrivateRoute exact path="/dashboard" component={Dashboard} />
+      <PrivateRoute path="/dashboard/:id" component={Dashboard} />
       <Route component={NotFound}/>
     </Switch>
   </Router>;

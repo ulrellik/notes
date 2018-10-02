@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import { Meteor } from 'meteor/meteor'
 import PropTypes from 'prop-types';
 import { withTracker } from 'meteor/react-meteor-data';
@@ -26,6 +26,8 @@ export class Login extends React.Component {
         this.setState({
           error: err.message,
         });
+      } else {
+        this.props.history.push('/dashboard');
       }
     });
   }
@@ -47,8 +49,8 @@ export class Login extends React.Component {
   }
 }
 
-export default LoginContainer = withTracker(props => {
+export default LoginContainer = withRouter(withTracker(props => {
   return {
     loginWithPassword: Meteor.loginWithPassword,
   };
-})(Login);
+})(Login));

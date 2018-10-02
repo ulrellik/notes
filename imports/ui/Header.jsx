@@ -2,6 +2,7 @@ import React from 'react';
 import { Meteor } from 'meteor/meteor';
 import PropTypes from 'prop-types';
 import { withTracker } from 'meteor/react-meteor-data';
+import { withRouter } from 'react-router-dom';
 
 export const Header = (props) => {
   return (
@@ -19,8 +20,8 @@ Header.propTypes = {
   handleLogout: PropTypes.func.isRequired,
 };
 
-export default HeaderContainer = withTracker(props => {
+export default HeaderContainer = withRouter(withTracker(props => {
   return {
-    handleLogout: () => Meteor.logout(),
+    handleLogout: () => Meteor.logout(() => props.history.push('/')),
   };
-})(Header);
+})(Header));
