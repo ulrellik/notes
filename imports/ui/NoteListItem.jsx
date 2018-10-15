@@ -7,9 +7,15 @@ import moment from 'moment';
 
 export default NoteListItem = props => {
   return (
-    <div className={ props.note.selected ? 'selected' : undefined } onClick={() => Session.set('selectedNoteId', props.note._id)}>
-      <h5>{ props.note.title || 'Untitled' }</h5>
-      <p>{ moment(props.note.updatedAt).format('DD/MM/YYYY') }</p>
+    <div
+      className={ props.note.selected ? 'item item--selected' : 'item' }
+      onClick={() => {
+        Session.set('selectedNoteId', props.note._id);
+        Session.set('isNavOpen', false);
+      }}
+    >
+      <h5 className="item__title">{ props.note.title || 'Untitled' }</h5>
+      <p className="item__subtitle">{ moment(props.note.updatedAt).format('DD/MM/YYYY') }</p>
     </div>
   );
 }

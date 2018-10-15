@@ -10,7 +10,7 @@ import NoteListItem from './NoteListItem';
 
 export const NoteList = props => {
   return (
-    <div>
+    <div className="item-list">
       <p>{props.notes.length} notes stored</p>
       <NoteListHeader/>
       {props.notes.map(note => <NoteListItem note={note} key={note._id}/>)}

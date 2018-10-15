@@ -12,11 +12,16 @@ import NotFound from '../ui/NotFound';
 export const history = createHistory();
 
 PrivateRoute = ({ component: Component, ...rest }) => (
-    <Route {...rest} render={ props => !!Meteor.userId() ? <Component {...props} /> : <Redirect to="/" />} />
+  <Route {...rest} render={ props => {
+    if (props.match) {
+      Session.set('selectedNoteId', props.match.params.id);
+    }
+    return !!Meteor.userId() ? <Component {...props} /> : <Redirect to="/" />;
+  }} />
 );
 
 PublicRoute = ({ component: Component, ...rest }) => (
-    <Route {...rest} render={ props => !Meteor.userId() ? <Component {...props} /> : <Redirect to="/dashboard" />} />
+  <Route {...rest} render={ props => !Meteor.userId() ? <Component {...props} /> : <Redirect to="/dashboard" />} />
 );
 
 

@@ -5,8 +5,8 @@ import { withTracker } from 'meteor/react-meteor-data';
 
 export default NoteListHeader = props => {
   return (
-    <div>
-      <button onClick={event => Meteor.call('notes.insert')}>Add note</button>
+    <div className="item-list__header">
+      <button className="button" onClick={event => Meteor.call('notes.insert')}>Add note</button>
     </div>
   );
 }

@@ -1,0 +1,24 @@
+.editor {
+  background-color: white;
+  width: 100%;
+  border: 1px solid grey;
+  display: flex;
+  flex-direction: column;
+  padding: $large-space;
+}
+
+.editor__title {
+  border: none;
+  border-bottom: 2px solid $grey;
+  font-size: $larger-font-size;
+  margin-bottom: $space;
+  outline: none;
+  padding: $input-spacing;
+}
+
+.editor__body {
+  flex-grow: 1;
+  font-weight: 300;
+  outline: none;
+  resize: none;
+}

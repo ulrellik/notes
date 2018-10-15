@@ -1,8 +1,45 @@
+.item-list {
+  background-color: white;
+  border: 1px solid $grey;
+  overflow-y: scroll;
+  width: 100%;
+}
+
+.item-list__header {
+  display: flex;
+  flex-direction: column;
+  padding: $space;
+}
+
 .item {
-  background: $item-bg;
-  border: 1px solid $item-border;
-  margin-bottom: $space;
-  padding: $space
+  cursor: pointer;
+  padding: $space;
+  border-left: $item-border-width solid transparent;
+  transition: border-left .3s ease, background-color .3s ease;
+}
+
+.item:hover {
+  background-color: lighten($grey,10%);
+  border-left: $item-border-width solid $grey;
+}
+
+.item--selected, .item--selected:hover {
+  background-color: $grey;
+  border-left: $item-border-width solid $brand-primary;
+}
+
+.item__title {
+  font-weight: normal;
+  font-size: $base-font-size;
+}
+
+.item--selected .item__title {
+  font-weight: bold;
+}
+
+.item__subtitle {
+  color: darken($grey, 30%);
+  margin: 0;
 }
 
 .item__message {

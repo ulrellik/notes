@@ -1,5 +1,41 @@
 .page-content {
+  display: flex;
   max-width: $site-max-width;
+  height: $page-content-height;
   margin: 0 auto;
-  padding: $space;
+
+  @include desktop {
+    padding: $large-space $space;
+  }
+}
+
+.page-content__sidebar {
+  display: flex;
+  width: 100vw;
+  position: fixed;
+  top: $header-height;
+  left: -100vw;
+  bottom: 0;
+  transition: left .3s ease;
+
+  @include desktop {
+    display: flex;
+    position: static;
+    width: $page-content-sidebar-width;
+    padding-right: $large-space;
+  }
+}
+
+.is-nav-open .page-content__sidebar {
+  left: 0vw;
+}
+
+
+.page-content__main {
+  display: flex;
+  width: 100%;
+
+    @include desktop {
+    width: $page-content-main-width;
+  }
 }

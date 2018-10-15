@@ -13,7 +13,12 @@ Tracker.autorun(() => {
   }
 });
 
+Tracker.autorun(() => {
+  document.body.classList.toggle('is-nav-open', Session.get('isNavOpen'));
+});
+
 Meteor.startup(() => {
   Session.setDefault('selectedNoteId', undefined);
+  Session.setDefault('isNavOpen', false);
   ReactDOM.render(routes, document.getElementById('app'));
 });

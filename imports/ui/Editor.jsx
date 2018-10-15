@@ -11,32 +11,53 @@ export class Editor extends React.Component {
   static propTypes = {
     selectedNoteId: PropTypes.string,
     note: PropTypes.object,
+    history: PropTypes.object,
   }
 
-  componentDidMount() {
-    if (this.props.match) {
-      Session.set('selectedNoteId', this.props.match.params.id)
+  state = {
+    title: '',
+    body: '',
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const prevId = prevProps.note ? prevProps.note._id : undefined;
+    const currId = this.props.note ? this.props.note._id : undefined;
+    if (currId && currId !== prevId) {
+      this.setState({ title: this.props.note.title, body: this.props.note.body });
     }
   }
 
   render() {
     if (!this.props.note) {
-      return <p>Pick a note</p>;
+      return <div className="editor"><p>Pick a note</p></div>;
     } else {
       return (
-        <div>
+        <div className="editor">
           <input
-            value={ this.props.note.title }
+            className="editor__title"
+            value={ this.state.title }
             placeholder="title of note"
-            onChange={event => Meteor.call('notes.update', this.props.note._id, { title: event.target.value })}
+            onChange={event => {
+              this.setState({ title: event.target.value });
+              Meteor.call('notes.update', this.props.note._id, { title: event.target.value });
+            }}
           />
           <textarea
-            value={ this.props.note.body }
+            className="editor__body"
+            value={ this.state.body }
             placeholder="Body of note"
-            onChange={event => Meteor.call('notes.update', this.props.note._id, { body: event.target.value })}
+            onChange={event => {
+              this.setState({ body: event.target.value });
+              Meteor.call('notes.update', this.props.note._id, { body: event.target.value })
+            }}
           >
           </textarea>
-          <button onClick={() => alert('deleted')}>Delete</button>
+          <div>
+            <button className="button button--pill" onClick={() => {
+              Meteor.call('notes.remove', this.props.note._id);
+              this.props.history.push('/dashboard/');
+            }}>Delete</button>
+          </div>
         </div>
       );
     }
